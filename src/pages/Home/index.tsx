@@ -30,6 +30,7 @@ interface Cycle {
 
 export function Home() {
   const [cycles, setCycles] = useState<Cycle[]>([])
+  const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
   const { register, handleSubmit, watch, reset } = useForm<NewCycleData>({
     resolver: zodResolver(newCycleFormValidationSchema),
     defaultValues: {
@@ -47,8 +48,7 @@ export function Home() {
     }
 
     setCycles((oldCycles) => [...oldCycles, newCycle])
-  function handleStartCycle(data: NewCycleData) {
-    console.log(data)
+    setActiveCycleId(newCycle.id)
     reset()
   }
 
