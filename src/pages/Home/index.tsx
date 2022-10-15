@@ -87,6 +87,12 @@ export function Home() {
   const task = watch('task')
   const shouldDisableSubmit = !task
 
+  useEffect(() => {
+    if (activeCycle) {
+      document.title = `Ignite Timer | ${minutes}:${seconds}`
+    }
+  }, [activeCycle, minutes, seconds])
+
   return (
     <HomeContainer>
       <form onSubmit={handleSubmit(handleCreateCycle)}>
