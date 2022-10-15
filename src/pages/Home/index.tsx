@@ -64,7 +64,7 @@ export function Home() {
     if (activeCycle) {
       setInterval(() => {
         setAmountSecondsPassed(
-          differenceInSeconds(new Date(), activeCycle.startDate)
+          differenceInSeconds(new Date(), activeCycle.startDate),
         )
       }, 1000)
     }
