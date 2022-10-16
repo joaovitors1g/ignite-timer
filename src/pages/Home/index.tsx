@@ -1,5 +1,8 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
 import { HandPalm, Play } from 'phosphor-react'
+import * as zod from 'zod'
+import { FormProvider, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import { NewCycleForm } from './components/NewCycleForm'
 import Countdown from './components/Countdown'
@@ -25,11 +28,31 @@ interface ICyclesContext {
   markCurrentCycleAsFinished: () => void
 }
 
+const newCycleFormValidationSchema = zod.object({
+  task: zod.string().min(1, 'Informe a tarefa'),
+  minutesAmount: zod
+    .number()
+    .min(5, 'O ciclo deve ser de no mínimo 5 minutos')
+    .max(60, 'O ciclo deve ser de no máximo 60 minutos'),
+})
+
+type NewCycleData = zod.infer<typeof newCycleFormValidationSchema>
+
 export const CyclesContext = createContext({} as ICyclesContext)
 
 export function Home() {
   const [cycles, setCycles] = useState<Cycle[]>([])
   const [activeCycleId, setActiveCycleId] = useState<string | null>(null)
+
+  const newCycleForm = useForm<NewCycleData>({
+    resolver: zodResolver(newCycleFormValidationSchema),
+    defaultValues: {
+      task: '',
+      minutesAmount: 0,
+    },
+  })
+
+  const { handleSubmit, watch, reset } = newCycleForm
 
   function handleCreateCycle(data: NewCycleData) {
     const newCycle: Cycle = {
@@ -82,7 +105,9 @@ export function Home() {
         <CyclesContext.Provider
           value={{ activeCycle, activeCycleId, markCurrentCycleAsFinished }}
         >
-          <NewCycleForm />
+          <FormProvider {...newCycleForm}>
+            <NewCycleForm />
+          </FormProvider>
           <Countdown />
         </CyclesContext.Provider>
 
