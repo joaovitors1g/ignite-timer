@@ -133,14 +133,6 @@ export function Home() {
   return (
     <HomeContainer>
       <form onSubmit={handleSubmit(handleCreateCycle)}>
-        <CountdownContainer>
-          <span>{minutes[0]}</span>
-          <span>{minutes[1]}</span>
-          <Colon>:</Colon>
-          <span>{seconds[0]}</span>
-          <span>{seconds[1]}</span>
-        </CountdownContainer>
-
         {activeCycle ? (
           <StopCountdownButton type="button" onClick={handleStopCycle}>
             <HandPalm size={24} />
