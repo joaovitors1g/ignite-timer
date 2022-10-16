@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 import { HandPalm, Play } from 'phosphor-react'
 
-import { NewCycleForm } from '../../components/NewCycleForm'
+import { NewCycleForm } from './components/NewCycleForm'
 import Countdown from './components/Countdown'
 
 import {
