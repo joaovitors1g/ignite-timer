@@ -6,7 +6,7 @@ import * as zod from 'zod'
 import differenceInSeconds from 'date-fns/differenceInSeconds'
 
 import { NewCycleForm } from '../../components/NewCycleForm'
-import Countdown from '../../components/Countdown'
+import Countdown from './components/Countdown'
 
 import {
   HomeContainer,
