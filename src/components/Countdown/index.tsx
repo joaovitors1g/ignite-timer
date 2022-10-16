@@ -5,7 +5,7 @@ export default function Countdown() {
     <CountdownContainer>
       <span>{minutes[0]}</span>
       <span>{minutes[1]}</span>
-      <Colons>:</Colons>
+      <Colon>:</Colon>
       <span>{seconds[0]}</span>
       <span>{seconds[1]}</span>
     </CountdownContainer>
