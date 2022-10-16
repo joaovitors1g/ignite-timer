@@ -5,15 +5,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 import differenceInSeconds from 'date-fns/differenceInSeconds'
 
+import { NewCycleForm } from '../../components/NewCycleForm'
+import Countdown from '../../components/Countdown'
+
 import {
-  Colon,
-  CountdownContainer,
-  FormContainer,
   HomeContainer,
-  MinutesAmountInput,
   StartCountdownButton,
   StopCountdownButton,
-  TaskInput,
 } from './styles'
 
 const newCycleFormValidationSchema = zod.object({
@@ -133,6 +131,9 @@ export function Home() {
   return (
     <HomeContainer>
       <form onSubmit={handleSubmit(handleCreateCycle)}>
+        <NewCycleForm />
+        <Countdown />
+
         {activeCycle ? (
           <StopCountdownButton type="button" onClick={handleStopCycle}>
             <HandPalm size={24} />
