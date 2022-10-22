@@ -23,11 +23,6 @@ interface ICyclesContextProviderProps {
   children: ReactNode
 }
 
-interface ICyclesState {
-  cycles: ICycle[]
-  activeCycleId: string | null
-}
-
 export function CyclesContextProvider({
   children,
 }: ICyclesContextProviderProps) {
