@@ -12,15 +12,21 @@ interface ICyclesState {
   activeCycleId: string | null
 }
 
+export enum ActionTypes {
+  ADD_NEW_CYCLE = 'ADD_NEW_CYCLE',
+  INTERRUPT_CURRENT_CYCLE = 'INTERRUPT_CURRENT_CYCLE',
+  MARK_CURRENT_CYCLE_AS_FINISHED = 'MARK_CURRENT_CYCLE_AS_FINISHED',
+}
+
 export function cyclesReducer(state: ICyclesState, action: any) {
   switch (action.type) {
-    case 'ADD_NEW_CYCLE':
+    case ActionTypes.ADD_NEW_CYCLE:
       return {
         ...state,
         cycles: [...state.cycles, action.payload.newCycle],
         activeCycleId: action.payload.newCycle.id,
       }
-    case 'INTERRUPT_CURRENT_CYCLE':
+    case ActionTypes.INTERRUPT_CURRENT_CYCLE:
       return {
         ...state,
         cycles: state.cycles.map((cycle) => {
@@ -31,7 +37,7 @@ export function cyclesReducer(state: ICyclesState, action: any) {
         }),
         activeCycleId: null,
       }
-    case 'MARK_CURRENT_CYCLE_AS_FINISHED':
+    case ActionTypes.MARK_CURRENT_CYCLE_AS_FINISHED:
       return {
         ...state,
         cycles: state.cycles.map((cycle) => {
