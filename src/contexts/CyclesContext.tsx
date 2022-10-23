@@ -42,6 +42,12 @@ export function CyclesContextProvider({
 
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
 
+  useEffect(() => {
+    const stateJson = JSON.stringify(cyclesState)
+
+    localStorage.setItem('@ignite-timer:cycles-state-1.0.0', stateJson)
+  }, [cyclesState])
+
   function createCycle(data: ICreateCycleData) {
     const newCycle: ICycle = {
       id: new Date().getTime().toString(),
